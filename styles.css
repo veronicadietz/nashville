@@ -51,3 +51,17 @@ body{font-size:16px}
 
 @media(max-width:760px){body{font-size:16px;line-height:1.62}.paper-card{padding:20px}.card-heading h3{font-size:1.5rem}.hat-copy{padding:30px 22px 4px}.hat-copy p{font-size:1rem}.draw-result{padding:14px;font-size:1rem}.activity-row{min-height:52px;padding:11px}.activity-row strong{font-size:1rem}.activity-detail-top h3{font-size:2rem}.detail-grid dt,.reservation-note label{font-size:.75rem}.detail-grid dd,.reservation-note p{font-size:1rem}.bottom-grid{grid-template-columns:1fr}.notes-card{order:-2;grid-column:auto;padding:22px 18px}.notes-intro{font-size:1rem}.note-form{grid-template-columns:1fr}.note-form textarea{min-height:108px;font-size:16px}.note-form .btn{min-height:50px}.notes-list{grid-template-columns:1fr}.notes-list li{font-size:1rem}.notes-card .sync-tools p{font-size:.92rem}.weather-card{grid-column:auto;padding:22px 18px}.weather-card .muted{font-size:1rem}.current-weather{grid-template-columns:auto 1fr;margin:14px 0 24px;padding:18px;gap:2px 14px}.current-label{grid-column:1/-1}.current-icon{grid-row:2/span 3;font-size:2.7rem}.current-weather strong{font-size:2.7rem}.current-description{font-size:1.05rem}.current-weather small{font-size:.88rem}.forecast-heading{font-size:1.08rem}.weather-grid{grid-template-columns:repeat(5,minmax(142px,1fr));gap:10px}.weather-day{min-height:156px;padding:12px}.weather-day .day{font-size:.78rem}.weather-day strong{font-size:1.18rem}.weather-day small,.weather-footnote{font-size:.94rem}.packing-card{min-height:0;padding:22px 18px}.packing-card .card-heading h3{font-size:1.5rem}.packing-intro{font-size:1rem}.packing-form{grid-template-columns:1fr}.packing-form input{font-size:16px}.packing-form .btn{min-height:48px}.packing-list label{font-size:1rem}.packing-card>img{position:static;width:150px;height:auto;margin:14px 0 0 auto;object-fit:contain;transform:none}}
 .packing-form input{width:100%;height:48px}
+
+/* Maximum-contrast Notes + Ideas treatment */
+.notes-card{color:#071f23;background:#fff0d8;border-color:#9a403b;box-shadow:0 20px 55px rgba(0,0,0,.34)}
+.notes-card .card-heading,.notes-card .card-heading h3,.notes-card .text-button,.notes-card strong{color:#061d21}
+.notes-card .text-button{background:#fff;border:2px solid #713933}
+.notes-intro{color:#09292d;font-weight:750}
+.note-form textarea{color:#061d21;background:#fff;border:3px solid #713933;font-weight:650}
+.note-form textarea::placeholder{color:#42585a;opacity:1}
+.notes-list li{color:#061d21;background:#fff;border:2px solid #c58b72;font-weight:650;box-shadow:0 3px 0 rgba(113,57,51,.1)}
+.notes-list button{color:#712d2a;background:#f8dfc5;border:1px solid #b56c58}
+.notes-card .sync-tools{border-color:#936655}
+.notes-card .sync-tools p{color:#0b3033;font-weight:650}
+.notes-card .btn-secondary{color:#061d21;background:#fff;border:2px solid #713933}
+.notes-card .btn-primary{color:#fff;background:#7e312e;border:2px solid #5e2422}
