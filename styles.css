@@ -65,3 +65,17 @@ body{font-size:16px}
 .notes-card .sync-tools p{color:#0b3033;font-weight:650}
 .notes-card .btn-secondary{color:#061d21;background:#fff;border:2px solid #713933}
 .notes-card .btn-primary{color:#fff;background:#7e312e;border:2px solid #5e2422}
+
+/* Pink Notes panel with bold, dark content cards */
+.notes-card{color:#fff7ec;background:#9b4656;border-color:#f0a28f}
+.notes-card .card-heading,.notes-card .card-heading h3,.notes-card .text-button,.notes-card strong{color:#fff9ef}
+.notes-card .text-button{color:#fff;background:#702f3d;border-color:#ffd1bf}
+.notes-intro{color:#fff8ee;font-weight:750}
+.note-form textarea{color:#03191d;background:#fff;border-color:#5b2630;font-weight:800}
+.note-form textarea::placeholder{color:#34494b;font-weight:700}
+.notes-list li{color:#03191d;background:#fff;border-color:#642d37;font-weight:800;box-shadow:0 4px 0 rgba(70,20,30,.18)}
+.notes-list button{color:#5f202b;background:#f7d8d9;border-color:#8a4550}
+.notes-card .sync-tools{border-color:rgba(255,245,232,.65)}
+.notes-card .sync-tools p{color:#fff8ef;font-weight:700}
+.notes-card .btn-secondary{color:#fff;background:#702f3d;border-color:#ffd1bf}
+.notes-card .btn-primary{color:#fff;background:#5e2531;border-color:#3f1820}
