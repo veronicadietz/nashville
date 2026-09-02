@@ -13,8 +13,8 @@ window.TRIP_DATA = {
   },
 
   images: {
-    hero: "assets/images/hero-placeholder.svg",
-    stay: "assets/images/stay-placeholder.svg"
+    hero: "assets/images/nashville.webp",
+    stay: "assets/images/stay.webp"
   },
 
   flights: [
@@ -177,7 +177,7 @@ window.TRIP_DATA = {
     {
       id: "horseback",
       title: "Horseback Riding",
-      icon: "horse",
+      icon: "trees",
       category: "outdoors",
       bestTime: "Morning",
       address: "Outfitter: TBD",

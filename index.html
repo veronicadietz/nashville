@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#9B3531">
+  <meta name="theme-color" content="#021f24">
   <meta name="description" content="Cowboys, Cocktails & Cosmic Virgos, a shared Nashville girls trip dashboard for Sept 19 - 23, 2026.">
   <title>Cowboys, Cocktails & Cosmic Virgos | Nashville Trip HQ</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -23,7 +23,7 @@
       <div class="sidebar-brand">
         <div class="amulet" aria-hidden="true">✦</div>
         <p>Welcome back</p>
-        <strong>Veronica</strong>
+        <strong>Ladies</strong>
       </div>
 
       <nav class="sidebar-nav">
@@ -36,8 +36,8 @@
       </nav>
 
       <div class="sidebar-card">
-        <span class="mini-star">✦</span>
-        <p>Good plans,<br>good friends,<br>& a little magic.</p>
+        <img src="assets/images/star-cluster.webp" alt="" width="120" height="120">
+        <p>Good plans, good friends<br>& a little magic.</p>
       </div>
 
       <div class="sidebar-orbit" aria-hidden="true">
@@ -48,13 +48,10 @@
     <main id="main-content" class="main-content">
       <section id="overview" class="hero section-shell">
         <div class="hero-copy">
-          <div class="eyebrow">Nashville Trip HQ</div>
+          <div class="eyebrow">Shared Nashville trip dashboard</div>
           <h1>Cowboys, Cocktails <span>&</span><br>Cosmic Virgos</h1>
-          <div class="hero-meta">
-            <span id="tripDates">Sept 19 - 23, 2026</span>
-            <span class="divider-dot">✦</span>
-            <span id="tripLocation">Nashville, Tennessee</span>
-          </div>
+          <div class="hero-meta"><span id="tripDates">Sept 19 - 23, 2026</span></div>
+          <p class="hero-location"><span class="divider-dot">✦</span><span id="tripLocation">Nashville, Tennessee</span><span class="divider-dot">✦</span></p>
           <p id="tripTagline">A shared trip site for plans, reservations, and spontaneous magic.</p>
 
           <div class="hero-actions">
@@ -63,11 +60,11 @@
           </div>
         </div>
 
-        <div class="hero-art" aria-label="Replaceable Nashville hero image">
-          <img id="heroImage" src="assets/images/hero-placeholder.svg" alt="Placeholder Nashville skyline artwork">
-          <span class="hero-butterfly" aria-hidden="true">✦</span>
-          <span class="hero-moon" aria-hidden="true">☾</span>
-          <div class="hero-sticker">Make<br>Magic</div>
+        <div class="hero-art" aria-label="Nashville at night">
+          <img id="heroImage" src="assets/images/nashville.webp" alt="Neon Nashville sign at night" width="900" height="900" fetchpriority="high">
+          <img class="hero-stars" src="assets/images/hero-stars.webp" alt="" width="1000" height="1000">
+          <img class="hero-butterfly" src="assets/images/butterfly.webp" alt="" width="360" height="360">
+          <div class="hero-sticker" aria-hidden="true">Make<br>Magic</div>
         </div>
 
         <div class="quick-stats" aria-label="Trip summary">
@@ -79,6 +76,7 @@
       </section>
 
       <section id="travel" class="section-shell">
+        <img class="section-sticker sticker-horseshoe" src="assets/images/horseshoe.webp" alt="" width="320" height="320" loading="lazy">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Foundational travel details</p>
@@ -102,15 +100,18 @@
           <article class="paper-card stay-card" id="stay">
             <div class="card-heading"><i data-lucide="house"></i><h3>Stay</h3></div>
             <div class="stay-image-wrap">
-              <img id="stayImage" src="assets/images/stay-placeholder.svg" alt="Replaceable Airbnb image placeholder">
+              <img id="stayImage" src="assets/images/stay.webp" alt="Living room at the Nashville Airbnb" width="1000" height="666" loading="lazy">
               <span class="heart-pin" aria-hidden="true">♡</span>
             </div>
+            <div class="stay-mini-photo"><img src="assets/images/firepit.webp" alt="Fire pit at the Nashville Airbnb" width="720" height="540" loading="lazy"><span>Backyard fire pit</span></div>
             <div id="stayDetails"></div>
           </article>
         </div>
       </section>
 
       <section id="activity-hat" class="section-shell activity-section">
+        <img class="section-sticker sticker-tarot" src="assets/images/tarot-hand.webp" alt="" width="420" height="420" loading="lazy">
+        <img class="section-sticker sticker-potion" src="assets/images/potion.webp" alt="" width="420" height="420" loading="lazy">
         <div class="section-heading">
           <div>
             <p class="eyebrow">The signature feature</p>
@@ -135,26 +136,7 @@
             <span class="hat-card-float card-a">Cocktails</span>
             <span class="hat-card-float card-b">Witchy night</span>
             <span class="hat-card-float card-c">Dolly day</span>
-            <svg class="hat-svg" viewBox="0 0 320 200" role="img" aria-label="Pink cowgirl hat illustration">
-              <defs>
-                <linearGradient id="hatFill" x1="0" x2="1">
-                  <stop offset="0%" stop-color="#9A5749"></stop>
-                  <stop offset="55%" stop-color="#C8795B"></stop>
-                  <stop offset="100%" stop-color="#9B3531"></stop>
-                </linearGradient>
-                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#715C46" flood-opacity="0.25"></feDropShadow>
-                </filter>
-              </defs>
-              <g filter="url(#softShadow)">
-                <path class="hat-brim" d="M32 132 C72 108 248 108 288 132 C254 168 66 168 32 132 Z" fill="url(#hatFill)"></path>
-                <path class="hat-crown" d="M92 123 C99 92 106 49 147 34 C161 29 178 32 191 40 C207 50 214 80 224 123 C190 136 126 136 92 123 Z" fill="url(#hatFill)"></path>
-                <path class="hat-band" d="M96 108 C132 120 187 120 220 108 L222 120 C186 133 128 133 94 120 Z" fill="#715C46"></path>
-                <circle cx="158" cy="121" r="13" fill="#FEE3D1" stroke="#715C46" stroke-width="4"></circle>
-                <path d="M158 110 L161 118 L170 118 L163 123 L166 132 L158 126 L150 132 L153 123 L146 118 L155 118 Z" fill="#9B3531"></path>
-                <path d="M61 133 C101 151 221 151 260 133" fill="none" stroke="#FEE3D1" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"></path>
-              </g>
-            </svg>
+            <img class="hat-svg" src="assets/images/cowboy-hat.webp" alt="Pink illustrated cowgirl hat" width="720" height="720" loading="lazy">
           </button>
         </div>
 
@@ -227,6 +209,22 @@
             </div>
           </div>
         </article>
+
+        <article class="paper-card packing-card">
+          <div class="card-heading"><i data-lucide="luggage"></i><h3>Packing & reminders</h3></div>
+          <label><input type="checkbox"> Cowboy boots (obvi)</label>
+          <label><input type="checkbox"> Pretty dresses & fringe</label>
+          <label><input type="checkbox"> Witchy essentials</label>
+          <label><input type="checkbox"> Swimwear (hot tub time!)</label>
+          <label><input type="checkbox"> Sun hat & sunnies</label>
+          <label><input type="checkbox"> Birthday outfit</label>
+          <img src="assets/images/cowboy-boots.webp" alt="Pink cowboy boots" width="420" height="420" loading="lazy">
+        </article>
+
+        <aside class="magic-quote" aria-label="Trip motto">
+          <img src="assets/images/witchy-sun.webp" alt="" width="420" height="420" loading="lazy">
+          <p>Nashville magic,<br>birthday sparkle<br>& good boots only.</p>
+        </aside>
       </section>
 
       <footer class="site-footer section-shell">

@@ -4,11 +4,11 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 
 ## What is already built
 
-- Responsive light scrapbook / Practical Magic / Nashville / Dolly sparkle design
+- Responsive dark-teal, copper, neon Nashville / Practical Magic design based on the supplied mockup
 - Display typography using Bodoni Moda as a web-safe stand-in for a Mythical Romance style display serif
 - Montserrat for body copy and UI text
 - Foundational cards for flights, Enterprise rental, and Airbnb stay
-- Animated pink cowgirl Activity Hat
+- Illustrated pink cowgirl Activity Hat using the supplied artwork
 - Random "pull from the hat" activity picker
 - Activity list with expandable detail panel
 - Add and edit activity details in the browser
@@ -17,7 +17,7 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 - Export and import trip updates as JSON
 - Live Nashville weather via Open-Meteo when the trip enters the forecast window
 - Mobile layout
-- Replaceable hero and Airbnb image placeholders
+- Optimized local WebP hero, Airbnb, fire-pit, butterfly, stars, boots, tarot, and other sticker artwork
 
 ## Files
 
@@ -25,8 +25,7 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 - `styles.css` - branding, layout, animations, responsive styles
 - `trip-data.js` - core trip content and activity starter data
 - `script.js` - activity picker, local edits, notes, weather, share tools
-- `assets/images/hero-placeholder.svg` - replace with your own hero image later
-- `assets/images/stay-placeholder.svg` - replace with your own Airbnb image later
+- `assets/images/*.webp` - compact, locally hosted artwork used by the page
 - `assets/favicon.svg` - simple moon and star favicon
 - `.nojekyll` - keeps GitHub Pages from applying Jekyll processing
 
@@ -43,18 +42,18 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 
 No build step is required.
 
-## Replace the images later
+## Image setup
 
 The image paths are controlled in `trip-data.js`:
 
 ```js
 images: {
-  hero: "assets/images/hero-placeholder.svg",
-  stay: "assets/images/stay-placeholder.svg"
+  hero: "assets/images/nashville.webp",
+  stay: "assets/images/stay.webp"
 }
 ```
 
-Add your JPG, PNG, or WebP files to `assets/images/`, then update those two paths. Example:
+To replace either image later, add a compact WebP file to `assets/images/`, then update those two paths.
 
 ```js
 images: {
@@ -63,7 +62,7 @@ images: {
 }
 ```
 
-You do not need to replace the weather visuals, Lucide UI icons, stars, moon details, or the animated Activity Hat.
+The current hero is prioritized for fast loading; all below-the-fold artwork uses native lazy loading.
 
 ## Update trip details
 
@@ -116,8 +115,8 @@ If you own a licensed webfont for Mythical Romance, place the licensed `.woff2` 
 - Rose brown: `#9A5749`
 - Olive taupe: `#715C46`
 - Dusty seafoam: `#98BDB6`
-- Deep teal: `#0D546B`
-- Cream: `#FEE3D1`
+- Deep teal: `#031F24`
+- Cream: `#FFE1BA`
 
 ## Best next upgrade
 
