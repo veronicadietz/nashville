@@ -13,7 +13,8 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 - Activity list with expandable detail panel
 - Add and edit activity details in the browser
 - Save / planned activity states
-- Notes section
+- High-contrast Notes + Ideas section with easy mobile entry
+- Editable Packing + Reminders checklist (add, check off, or remove items)
 - Export and import trip updates as JSON
 - Live Nashville weather via Open-Meteo when the trip enters the forecast window
 - Mobile layout
@@ -95,9 +96,9 @@ For true shared live editing, the next version should connect the same interface
 
 ## Weather
 
-Weather uses the free Open-Meteo API with Nashville coordinates. No API key is required.
+Weather uses the free Open-Meteo API with Nashville coordinates. No API key is required. The highlighted “Nashville right now” card loads current conditions every time the page opens.
 
-The API does not provide reliable forecasts months in advance. Until the trip enters the available forecast window, the site displays the five trip dates as pending plus the seasonal Nashville note. When all five dates become available, the panel automatically switches to live forecast data.
+The API does not provide reliable forecasts months in advance. Until the trip enters the available forecast window, the site displays the five trip dates as pending. When all five dates become available, that row automatically switches to the Sept. 19–23 live forecast—no manual update is needed.
 
 ## Typography
 

@@ -94,6 +94,7 @@
 
           <article class="paper-card car-card">
             <div class="card-heading"><i data-lucide="car-front"></i><h3>Car rental</h3></div>
+            <img class="car-image" src="assets/images/rental-car-original.webp" alt="White Buick Envista rental car" width="800" height="450" loading="lazy">
             <div id="carDetails"></div>
           </article>
 
@@ -183,6 +184,11 @@
         <article id="weather" class="paper-card weather-card">
           <div class="card-heading"><i data-lucide="cloud-sun"></i><h3>Weather</h3></div>
           <p id="weatherStatus" class="muted">Checking Nashville forecast window...</p>
+          <div id="currentWeather" class="current-weather" aria-live="polite">
+            <span class="current-label">Nashville right now</span>
+            <strong>Loading current conditions…</strong>
+          </div>
+          <h4 class="forecast-heading">Travel dates · Sept 19–23</h4>
           <div id="weatherGrid" class="weather-grid" aria-live="polite"></div>
           <div class="weather-footnote"><span aria-hidden="true">✦</span><span id="weatherFootnote"></span></div>
         </article>
@@ -192,11 +198,12 @@
             <div><i data-lucide="notebook-pen"></i><h3>Notes + ideas</h3></div>
             <button class="text-button" id="exportBtn" type="button"><i data-lucide="download"></i>Export</button>
           </div>
+          <p class="notes-intro">Keep reservation reminders, links, outfit ideas, and group decisions here. New notes save on this device.</p>
 
           <form id="noteForm" class="note-form">
             <label class="sr-only" for="noteInput">Add a trip note</label>
-            <input id="noteInput" name="note" type="text" maxlength="180" placeholder="Add a note, reservation reminder, outfit idea..." required>
-            <button class="btn btn-primary" type="submit">Add note</button>
+            <textarea id="noteInput" name="note" rows="2" maxlength="300" placeholder="Type a note, reservation reminder, link, or idea…" required></textarea>
+            <button class="btn btn-primary" type="submit"><i data-lucide="plus"></i>Add note</button>
           </form>
 
           <ul id="notesList" class="notes-list"></ul>
@@ -212,12 +219,13 @@
 
         <article class="paper-card packing-card">
           <div class="card-heading"><i data-lucide="luggage"></i><h3>Packing & reminders</h3></div>
-          <label><input type="checkbox"> Cowboy boots (obvi)</label>
-          <label><input type="checkbox"> Pretty dresses & fringe</label>
-          <label><input type="checkbox"> Witchy essentials</label>
-          <label><input type="checkbox"> Swimwear (hot tub time!)</label>
-          <label><input type="checkbox"> Sun hat & sunnies</label>
-          <label><input type="checkbox"> Birthday outfit</label>
+          <p class="packing-intro">Check things off or add anything the group should remember.</p>
+          <form id="packingForm" class="packing-form">
+            <label class="sr-only" for="packingInput">Add a packing item</label>
+            <input id="packingInput" maxlength="100" placeholder="Add a packing item…" required>
+            <button class="btn btn-primary" type="submit"><i data-lucide="plus"></i>Add</button>
+          </form>
+          <ul id="packingList" class="packing-list"></ul>
           <img src="assets/images/cowboy-boots.webp" alt="Pink cowboy boots" width="420" height="420" loading="lazy">
         </article>
 

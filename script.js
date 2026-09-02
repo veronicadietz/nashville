@@ -8,19 +8,32 @@
     customActivities: "cosmicVirgos.customActivities.v1",
     activityEdits: "cosmicVirgos.activityEdits.v1",
     activityFlags: "cosmicVirgos.activityFlags.v1",
-    notes: "cosmicVirgos.notes.v1"
+    notes: "cosmicVirgos.notes.v1",
+    packing: "cosmicVirgos.packing.v1"
   };
 
   const defaultNotes = [
-    "Pack cowboy boots and fringe outfits.",
-    "Book the birthday dinner once the final restaurant is chosen.",
-    "Bring the Practical Magic movie night supplies."
+    "Vote on the tattoo design and studio before booking.",
+    "Choose the birthday dinner and brunch, then reserve for the full group.",
+    "Bring the Practical Magic movie-night supplies."
   ];
+
+  const defaultPacking = [
+    "Cowboy boots",
+    "Pretty dresses and fringe",
+    "Witchy-night supplies",
+    "Sun hat and sunglasses",
+    "Chargers and adapters",
+    "Birthday outfit"
+  ].map((text) => ({ text, done: false }));
 
   let customActivities = readJSON(STORAGE.customActivities, []);
   let activityEdits = readJSON(STORAGE.activityEdits, {});
   let activityFlags = readJSON(STORAGE.activityFlags, {});
   let notes = readJSON(STORAGE.notes, defaultNotes);
+  let packingItems = readJSON(STORAGE.packing, defaultPacking)
+    .map((item) => typeof item === "string" ? { text: item, done: false } : item)
+    .filter((item) => item && item.text);
   let selectedActivityId = data.activities[0]?.id || null;
   let toastTimer = null;
 
@@ -383,6 +396,57 @@
     showToast("Note saved on this browser.");
   }
 
+  function renderPacking() {
+    const list = $("#packingList");
+    list.innerHTML = "";
+
+    packingItems.forEach((item, index) => {
+      const li = document.createElement("li");
+      const label = document.createElement("label");
+      const checkbox = document.createElement("input");
+      const text = document.createElement("span");
+      const remove = document.createElement("button");
+
+      checkbox.type = "checkbox";
+      checkbox.checked = Boolean(item.done);
+      checkbox.setAttribute("aria-label", `Mark ${item.text} packed`);
+      checkbox.addEventListener("change", () => {
+        packingItems[index].done = checkbox.checked;
+        writeJSON(STORAGE.packing, packingItems);
+        li.classList.toggle("done", checkbox.checked);
+      });
+
+      text.textContent = item.text;
+      label.append(checkbox, text);
+      remove.type = "button";
+      remove.className = "packing-remove";
+      remove.setAttribute("aria-label", `Remove packing item: ${item.text}`);
+      remove.innerHTML = '<i data-lucide="x"></i>';
+      remove.addEventListener("click", () => {
+        packingItems.splice(index, 1);
+        writeJSON(STORAGE.packing, packingItems);
+        renderPacking();
+      });
+
+      li.classList.toggle("done", Boolean(item.done));
+      li.append(label, remove);
+      list.appendChild(li);
+    });
+    refreshIcons();
+  }
+
+  function addPackingItem(event) {
+    event.preventDefault();
+    const input = $("#packingInput");
+    const text = input.value.trim();
+    if (!text) return;
+    packingItems.push({ text: text.slice(0, 100), done: false });
+    writeJSON(STORAGE.packing, packingItems);
+    input.value = "";
+    renderPacking();
+    showToast("Packing item added.");
+  }
+
   function exportUpdates() {
     const payload = {
       schemaVersion: 1,
@@ -391,7 +455,8 @@
       customActivities,
       activityEdits,
       activityFlags,
-      notes
+      notes,
+      packingItems
     };
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -415,15 +480,20 @@
         if (Array.isArray(payload.customActivities)) customActivities = payload.customActivities.slice(0, 100);
         if (payload.activityEdits && typeof payload.activityEdits === "object") activityEdits = payload.activityEdits;
         if (payload.activityFlags && typeof payload.activityFlags === "object") activityFlags = payload.activityFlags;
-        if (Array.isArray(payload.notes)) notes = payload.notes.slice(0, 40).map((note) => String(note).slice(0, 180));
+        if (Array.isArray(payload.notes)) notes = payload.notes.slice(0, 40).map((note) => String(note).slice(0, 300));
+        if (Array.isArray(payload.packingItems)) packingItems = payload.packingItems.slice(0, 60)
+          .map((item) => typeof item === "string" ? { text: item.slice(0, 100), done: false } : { text: String(item.text || "").slice(0, 100), done: Boolean(item.done) })
+          .filter((item) => item.text);
 
         writeJSON(STORAGE.customActivities, customActivities);
         writeJSON(STORAGE.activityEdits, activityEdits);
         writeJSON(STORAGE.activityFlags, activityFlags);
         writeJSON(STORAGE.notes, notes);
+        writeJSON(STORAGE.packing, packingItems);
 
         if (!getActivity(selectedActivityId)) selectedActivityId = getActivities()[0]?.id || null;
         renderNotes();
+        renderPacking();
         renderActivityList();
         if (selectedActivityId) selectActivity(selectedActivityId);
         showToast("Trip updates imported.");
@@ -459,6 +529,7 @@
 
   async function loadWeather() {
     const status = $("#weatherStatus");
+    const current = $("#currentWeather");
     const grid = $("#weatherGrid");
     const footnote = $("#weatherFootnote");
     renderPendingWeather();
@@ -467,6 +538,7 @@
     const params = new URLSearchParams({
       latitude: String(data.weather.latitude),
       longitude: String(data.weather.longitude),
+      current: "temperature_2m,apparent_temperature,weather_code,wind_speed_10m",
       daily: "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
       temperature_unit: "fahrenheit",
       timezone: data.weather.timezone,
@@ -480,6 +552,21 @@
       const daily = payload.daily;
       if (!daily || !Array.isArray(daily.time)) throw new Error("Weather payload missing");
 
+      const now = payload.current;
+      if (now && Number.isFinite(now.temperature_2m)) {
+        const icon = weatherIcon(now.weather_code);
+        const feels = Number.isFinite(now.apparent_temperature) ? Math.round(now.apparent_temperature) : "–";
+        const wind = Number.isFinite(now.wind_speed_10m) ? Math.round(now.wind_speed_10m) : "–";
+        current.innerHTML = `
+          <span class="current-label">Nashville right now</span>
+          <span class="current-icon" aria-hidden="true">${icon}</span>
+          <strong>${Math.round(now.temperature_2m)}°F</strong>
+          <span class="current-description">${escapeHTML(weatherDescription(now.weather_code))}</span>
+          <small>Feels like ${feels}° · Wind ${wind} mph</small>
+        `;
+        status.textContent = "Current conditions update automatically whenever the page opens.";
+      }
+
       const tripRows = daily.time.map((date, index) => ({
         date,
         code: daily.weather_code?.[index],
@@ -489,14 +576,14 @@
       })).filter((row) => row.date >= data.trip.startDate && row.date <= data.trip.endDate);
 
       if (tripRows.length === 5) {
-        status.textContent = "Live Nashville trip forecast";
         grid.innerHTML = tripRows.map(weatherCardHTML).join("");
         footnote.textContent = "Live weather data from Open-Meteo. Check again before packing because September storms can shift quickly.";
       } else {
-        status.textContent = "The trip dates are just outside the live forecast window.";
+        footnote.textContent = "The Sept 19–23 forecast will appear here automatically once those dates enter the reliable forecast window. Current Nashville weather is already live above.";
       }
     } catch {
       status.textContent = "Live weather is temporarily unavailable.";
+      current.innerHTML = '<span class="current-label">Nashville right now</span><strong>Refresh to try again</strong>';
       footnote.textContent = `${data.weather.seasonalNote} Refresh later to retry.`;
     }
   }
@@ -509,7 +596,7 @@
         <span class="day">${escapeHTML(formatShortDate(date))}</span>
         <span class="weather-icon" aria-hidden="true">✧</span>
         <strong>Pending</strong>
-        <small>Forecast window</small>
+        <small>Auto-updates closer to the trip</small>
       </div>
     `).join("");
   }
@@ -539,6 +626,18 @@
     if ([71, 73, 75, 77, 85, 86].includes(code)) return "🌨️";
     if ([95, 96, 99].includes(code)) return "⛈️";
     return "🌤️";
+  }
+
+  function weatherDescription(code) {
+    if (code === 0) return "Clear sky";
+    if ([1, 2].includes(code)) return "Partly cloudy";
+    if (code === 3) return "Cloudy";
+    if ([45, 48].includes(code)) return "Foggy";
+    if ([51, 53, 55, 56, 57].includes(code)) return "Light rain";
+    if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return "Rain";
+    if ([71, 73, 75, 77, 85, 86].includes(code)) return "Snow";
+    if ([95, 96, 99].includes(code)) return "Thunderstorms";
+    return "Mixed conditions";
   }
 
   function parseDateParts(dateString) {
@@ -589,6 +688,7 @@
     $("#cancelDialogBtn").addEventListener("click", closeActivityDialog);
     $("#activityForm").addEventListener("submit", saveActivityFromForm);
     $("#noteForm").addEventListener("submit", addNote);
+    $("#packingForm").addEventListener("submit", addPackingItem);
     $("#exportBtn").addEventListener("click", exportUpdates);
     $("#importBtn").addEventListener("click", () => $("#importFile").click());
     $("#importFile").addEventListener("change", (event) => {
@@ -606,6 +706,7 @@
     renderActivityList();
     if (selectedActivityId) selectActivity(selectedActivityId);
     renderNotes();
+    renderPacking();
     setupNavigation();
     bindEvents();
     refreshIcons();

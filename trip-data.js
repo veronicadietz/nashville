@@ -144,11 +144,23 @@ window.TRIP_DATA = {
       icon: "moon-star",
       category: "witchy",
       bestTime: "Sunset or after dinner",
-      address: "Airbnb or a quiet outdoor spot",
-      phone: "Not needed",
-      reservationNotes: "Bring a deck, candles, journals, and one intention for the birthday year ahead.",
+      address: "The Makeup Altar · 114 A S 11th St, Nashville, TN 37206",
+      phone: "(615) 538-4515",
+      reservationNotes: "Option 1: book tarot readings at The Makeup Altar in Five Points. Option 2: DIY at the Airbnb with a deck, ritual candles, journals, and one intention for the birthday year ahead. Confirm reader availability before choosing.",
       vibe: "Magical + reflective",
-      link: ""
+      link: "https://themakeupaltar.com/"
+    },
+    {
+      id: "candle-pouring",
+      title: "Intentional Candle-Pouring Workshop",
+      icon: "flame",
+      category: "witchy",
+      bestTime: "Afternoon · reserve a group time",
+      address: "Intentional Illumination at Nashville Farmers’ Market",
+      phone: "(800) 984-7262",
+      reservationNotes: "A separate hands-on option if the group prefers making intention candles instead of tarot. Check the official booking calendar before adding it to the plan.",
+      vibe: "Creative + witchy",
+      link: "https://www.intentionalillumination.com/"
     },
     {
       id: "music-row",
@@ -168,11 +180,11 @@ window.TRIP_DATA = {
       icon: "heart-pulse",
       category: "birthday",
       bestTime: "Afternoon, before a low-key evening",
-      address: "Tattoo shop: TBD",
-      phone: "TBD",
-      reservationNotes: "Choose the design first, then book a reputable shop. Avoid making this the heavy drinking night.",
+      address: "Duel in the Sun · 3617 Gallatin Pike, Nashville, TN 37216",
+      phone: "Call or text through the studio website",
+      reservationNotes: "East Nashville option with custom work, original flash, and walk-ins on open days. Backup options: Kind Tattoo Parlor or Safe House Tattoo Studio. Agree on the design and placement first, then request appointments together. Avoid making this the heavy-drinking night.",
       vibe: "Bold + personal",
-      link: ""
+      link: "https://www.duelinthesun.co/"
     },
     {
       id: "horseback",
@@ -216,11 +228,11 @@ window.TRIP_DATA = {
       icon: "shirt",
       category: "shopping",
       bestTime: "Late morning into early afternoon",
-      address: "East Nashville + vintage shops, final route TBD",
+      address: "Start: Music City Vintage · 1006 Fatherland St, Suite 305",
       phone: "Not usually needed",
-      reservationNotes: "Create a short hit list and leave room for spontaneous finds.",
+      reservationNotes: "Suggested East Nashville loop: Music City Vintage for ’80s/’90s finds, then Garage Sale Vintage for shopping plus drinks, with Anaconda Vintage or High Class Hillbilly as optional add-ons. Recheck store hours before the trip.",
       vibe: "Vintage + western",
-      link: ""
+      link: "https://www.musiccityvtg.com/pages/visit-us-east-nashville"
     },
     {
       id: "parthenon",
@@ -240,11 +252,11 @@ window.TRIP_DATA = {
       icon: "utensils",
       category: "food",
       bestTime: "Reserve prime dinners 2 to 4 weeks ahead",
-      address: "Restaurant shortlist: TBD",
-      phone: "Add with final reservations",
-      reservationNotes: "Prioritize one major birthday dinner, one photogenic brunch, and keep the rest flexible.",
+      address: "Sirocco · 970 Woodland St, Nashville, TN 37206",
+      phone: "(615) 664-8658",
+      reservationNotes: "East Nashville option: Sirocco serves weekend brunch and dinner in a celebratory lounge setting. Brunch alternative: The Henry in 12 South. Choose one birthday dinner and one brunch, then reserve for the full group.",
       vibe: "Pretty + celebratory",
-      link: ""
+      link: "https://www.the-sirocco.com/"
     }
   ]
 };
