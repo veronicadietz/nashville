@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Replaceable Airbnb image placeholder</title>
+  <desc id="desc">Warm illustrated room placeholder for the Nashville Airbnb.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FEE3D1"/>
+      <stop offset="1" stop-color="#EFC9B2"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#wall)"/>
+  <rect x="70" y="80" width="270" height="185" rx="10" fill="#FFF7EE" stroke="#9A5749" stroke-width="4"/>
+  <line x1="205" y1="80" x2="205" y2="265" stroke="#9A5749" stroke-width="4"/>
+  <line x1="70" y1="172" x2="340" y2="172" stroke="#9A5749" stroke-width="4"/>
+  <rect x="390" y="220" width="320" height="150" rx="28" fill="#98BDB6" opacity="0.72"/>
+  <rect x="415" y="190" width="150" height="72" rx="28" fill="#FFF7EE"/>
+  <rect x="560" y="196" width="125" height="66" rx="25" fill="#C8795B" opacity="0.72"/>
+  <rect x="355" y="370" width="390" height="25" rx="12" fill="#715C46" opacity="0.7"/>
+  <circle cx="655" cy="113" r="38" fill="#9B3531" opacity="0.14"/>
+  <path d="M654 90c18 0 29 22 0 48-29-26-18-48 0-48z" fill="#9B3531" opacity="0.7"/>
+  <g fill="#B58A45">
+    <circle cx="398" cy="74" r="5"/><circle cx="449" cy="54" r="4"/><circle cx="503" cy="73" r="5"/><circle cx="552" cy="54" r="4"/><circle cx="605" cy="73" r="5"/>
+  </g>
+  <path d="M398 74 Q450 30 503 73 Q555 30 605 73" fill="none" stroke="#715C46" stroke-width="2" opacity="0.6"/>
+  <text x="70" y="438" font-family="Georgia, serif" font-size="30" fill="#9B3531">Airbnb photo placeholder</text>
+  <text x="72" y="470" font-family="Arial, sans-serif" font-size="17" fill="#715C46">Replace with your own listing or trip photo</text>
+</svg>

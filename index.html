@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#9B3531">
+  <meta name="description" content="Cowboys, Cocktails & Cosmic Virgos, a shared Nashville girls trip dashboard for Sept 19 - 23, 2026.">
+  <title>Cowboys, Cocktails & Cosmic Virgos | Nashville Trip HQ</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
+  <script defer src="trip-data.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to trip details</a>
+
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Trip navigation">
+      <div class="sidebar-brand">
+        <div class="amulet" aria-hidden="true">✦</div>
+        <p>Welcome back</p>
+        <strong>Veronica</strong>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link active" href="#overview"><i data-lucide="home"></i><span>Overview</span></a>
+        <a class="nav-link" href="#travel"><i data-lucide="plane"></i><span>Travel</span></a>
+        <a class="nav-link" href="#stay"><i data-lucide="bed-double"></i><span>Stay</span></a>
+        <a class="nav-link" href="#activity-hat"><i data-lucide="sparkles"></i><span>Activity Hat</span></a>
+        <a class="nav-link" href="#weather"><i data-lucide="cloud-sun"></i><span>Weather</span></a>
+        <a class="nav-link" href="#notes"><i data-lucide="notebook-tabs"></i><span>Notes</span></a>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="mini-star">✦</span>
+        <p>Good plans,<br>good friends,<br>& a little magic.</p>
+      </div>
+
+      <div class="sidebar-orbit" aria-hidden="true">
+        <span>☾</span><span>✦</span><span>✧</span>
+      </div>
+    </aside>
+
+    <main id="main-content" class="main-content">
+      <section id="overview" class="hero section-shell">
+        <div class="hero-copy">
+          <div class="eyebrow">Nashville Trip HQ</div>
+          <h1>Cowboys, Cocktails <span>&</span><br>Cosmic Virgos</h1>
+          <div class="hero-meta">
+            <span id="tripDates">Sept 19 - 23, 2026</span>
+            <span class="divider-dot">✦</span>
+            <span id="tripLocation">Nashville, Tennessee</span>
+          </div>
+          <p id="tripTagline">A shared trip site for plans, reservations, and spontaneous magic.</p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="shareTripBtn" type="button"><i data-lucide="send"></i>Share trip</button>
+            <a class="btn btn-secondary" href="#activity-hat"><i data-lucide="sparkles"></i>Pull an idea</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Replaceable Nashville hero image">
+          <img id="heroImage" src="assets/images/hero-placeholder.svg" alt="Placeholder Nashville skyline artwork">
+          <span class="hero-butterfly" aria-hidden="true">✦</span>
+          <span class="hero-moon" aria-hidden="true">☾</span>
+          <div class="hero-sticker">Make<br>Magic</div>
+        </div>
+
+        <div class="quick-stats" aria-label="Trip summary">
+          <article><i data-lucide="users"></i><strong id="statTravelers">3</strong><span>Travelers</span></article>
+          <article><i data-lucide="moon"></i><strong id="statNights">4</strong><span>Nights</span></article>
+          <article><i data-lucide="map-pin"></i><strong>East</strong><span>Nashville</span></article>
+          <article><i data-lucide="sparkles"></i><strong id="daysToGo">--</strong><span>Days to go</span></article>
+        </div>
+      </section>
+
+      <section id="travel" class="section-shell">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Foundational travel details</p>
+            <h2>Flights, wheels, home base.</h2>
+          </div>
+          <p>These stay fixed while the rest of the trip can remain flexible.</p>
+        </div>
+
+        <div class="foundation-grid">
+          <article class="paper-card flight-card">
+            <div class="card-heading"><i data-lucide="plane"></i><h3>Flights</h3></div>
+            <div id="flightList" class="flight-list"></div>
+            <div class="soft-note" id="airportNote"></div>
+          </article>
+
+          <article class="paper-card car-card">
+            <div class="card-heading"><i data-lucide="car-front"></i><h3>Car rental</h3></div>
+            <div id="carDetails"></div>
+          </article>
+
+          <article class="paper-card stay-card" id="stay">
+            <div class="card-heading"><i data-lucide="house"></i><h3>Stay</h3></div>
+            <div class="stay-image-wrap">
+              <img id="stayImage" src="assets/images/stay-placeholder.svg" alt="Replaceable Airbnb image placeholder">
+              <span class="heart-pin" aria-hidden="true">♡</span>
+            </div>
+            <div id="stayDetails"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="activity-hat" class="section-shell activity-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">The signature feature</p>
+            <h2>Pull from the hat.</h2>
+          </div>
+          <p>No rigid minute-by-minute schedule. Draw the mood, then decide what sounds good.</p>
+        </div>
+
+        <div class="hat-stage">
+          <div class="hat-copy">
+            <span class="magic-label">Activity Hat</span>
+            <h3>Tap the hat to pull the vibe.</h3>
+            <p>It shuffles the activity list and surfaces one idea for the group.</p>
+            <button class="btn btn-teal" id="drawIdeaBtn" type="button"><i data-lucide="shuffle"></i>Shuffle ideas</button>
+            <div id="drawResult" class="draw-result" aria-live="polite">Your next idea will appear here.</div>
+          </div>
+
+          <button class="cowgirl-hat" id="hatButton" type="button" aria-label="Draw a random activity from the cowgirl hat">
+            <span class="hat-spark s1">✦</span>
+            <span class="hat-spark s2">✧</span>
+            <span class="hat-spark s3">✦</span>
+            <span class="hat-card-float card-a">Cocktails</span>
+            <span class="hat-card-float card-b">Witchy night</span>
+            <span class="hat-card-float card-c">Dolly day</span>
+            <svg class="hat-svg" viewBox="0 0 320 200" role="img" aria-label="Pink cowgirl hat illustration">
+              <defs>
+                <linearGradient id="hatFill" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#9A5749"></stop>
+                  <stop offset="55%" stop-color="#C8795B"></stop>
+                  <stop offset="100%" stop-color="#9B3531"></stop>
+                </linearGradient>
+                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#715C46" flood-opacity="0.25"></feDropShadow>
+                </filter>
+              </defs>
+              <g filter="url(#softShadow)">
+                <path class="hat-brim" d="M32 132 C72 108 248 108 288 132 C254 168 66 168 32 132 Z" fill="url(#hatFill)"></path>
+                <path class="hat-crown" d="M92 123 C99 92 106 49 147 34 C161 29 178 32 191 40 C207 50 214 80 224 123 C190 136 126 136 92 123 Z" fill="url(#hatFill)"></path>
+                <path class="hat-band" d="M96 108 C132 120 187 120 220 108 L222 120 C186 133 128 133 94 120 Z" fill="#715C46"></path>
+                <circle cx="158" cy="121" r="13" fill="#FEE3D1" stroke="#715C46" stroke-width="4"></circle>
+                <path d="M158 110 L161 118 L170 118 L163 123 L166 132 L158 126 L150 132 L153 123 L146 118 L155 118 Z" fill="#9B3531"></path>
+                <path d="M61 133 C101 151 221 151 260 133" fill="none" stroke="#FEE3D1" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"></path>
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="activity-workspace">
+          <div class="activity-list-panel paper-card">
+            <div class="card-heading split-heading">
+              <div><i data-lucide="list-filter"></i><h3>Activity ideas</h3></div>
+              <button class="text-button" id="addActivityBtn" type="button"><i data-lucide="plus"></i>Add</button>
+            </div>
+            <div id="activityList" class="activity-list" role="list"></div>
+          </div>
+
+          <article class="activity-detail paper-card" aria-live="polite">
+            <div class="activity-detail-top">
+              <div>
+                <p class="eyebrow">Selected idea</p>
+                <h3 id="activityTitle">Choose an activity</h3>
+              </div>
+              <button class="icon-button" id="editActivityBtn" type="button" aria-label="Edit selected activity"><i data-lucide="pencil"></i></button>
+            </div>
+
+            <dl class="detail-grid">
+              <div><dt><i data-lucide="clock-3"></i>Best time</dt><dd id="activityBestTime">Select an activity to see details.</dd></div>
+              <div><dt><i data-lucide="map-pin"></i>Address</dt><dd id="activityAddress">-</dd></div>
+              <div><dt><i data-lucide="phone"></i>Phone</dt><dd id="activityPhone">-</dd></div>
+              <div><dt><i data-lucide="sparkles"></i>Vibe</dt><dd id="activityVibe">-</dd></div>
+            </dl>
+
+            <div class="reservation-note">
+              <label>Reservation notes</label>
+              <p id="activityNotes">-</p>
+            </div>
+
+            <div class="detail-actions">
+              <button class="btn btn-primary" id="planBtn" type="button"><i data-lucide="calendar-plus"></i>Add to plan</button>
+              <button class="btn btn-secondary" id="favoriteBtn" type="button"><i data-lucide="heart"></i>Save</button>
+              <a class="btn btn-ghost hidden" id="activityLink" href="#" target="_blank" rel="noreferrer"><i data-lucide="external-link"></i>Open link</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="bottom-grid section-shell">
+        <article id="weather" class="paper-card weather-card">
+          <div class="card-heading"><i data-lucide="cloud-sun"></i><h3>Weather</h3></div>
+          <p id="weatherStatus" class="muted">Checking Nashville forecast window...</p>
+          <div id="weatherGrid" class="weather-grid" aria-live="polite"></div>
+          <div class="weather-footnote"><span aria-hidden="true">✦</span><span id="weatherFootnote"></span></div>
+        </article>
+
+        <article id="notes" class="paper-card notes-card">
+          <div class="card-heading split-heading">
+            <div><i data-lucide="notebook-pen"></i><h3>Notes + ideas</h3></div>
+            <button class="text-button" id="exportBtn" type="button"><i data-lucide="download"></i>Export</button>
+          </div>
+
+          <form id="noteForm" class="note-form">
+            <label class="sr-only" for="noteInput">Add a trip note</label>
+            <input id="noteInput" name="note" type="text" maxlength="180" placeholder="Add a note, reservation reminder, outfit idea..." required>
+            <button class="btn btn-primary" type="submit">Add note</button>
+          </form>
+
+          <ul id="notesList" class="notes-list"></ul>
+
+          <div class="sync-tools">
+            <p><strong>Static site note:</strong> edits save to this browser. Export updates to share them with the group or move them into the base data file.</p>
+            <div class="sync-actions">
+              <button class="btn btn-secondary" id="importBtn" type="button"><i data-lucide="upload"></i>Import updates</button>
+              <input class="hidden" id="importFile" type="file" accept="application/json,.json">
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <footer class="site-footer section-shell">
+        <span>Good friends</span><b>✦</b><span>Good plans</span><b>☾</b><span>A little magic</span><b>✦</b><span>Nashville nights</span>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="activityDialog" class="activity-dialog">
+    <form method="dialog" id="activityForm" class="activity-form">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Activity details</p>
+          <h2 id="dialogTitle">Add activity</h2>
+        </div>
+        <button class="icon-button" type="button" id="closeDialogBtn" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+
+      <input type="hidden" id="activityIdField">
+      <div class="form-grid">
+        <label>Activity name<input id="activityNameField" required maxlength="100"></label>
+        <label>Best time<input id="activityBestTimeField" maxlength="100"></label>
+        <label>Address<input id="activityAddressField" maxlength="180"></label>
+        <label>Phone<input id="activityPhoneField" maxlength="80"></label>
+        <label>Vibe<input id="activityVibeField" maxlength="80"></label>
+        <label>Link<input id="activityLinkField" type="url" maxlength="250" placeholder="https://"></label>
+        <label class="full-field">Reservation notes<textarea id="activityNotesField" rows="4" maxlength="400"></textarea></label>
+      </div>
+
+      <div class="dialog-actions">
+        <button class="btn btn-secondary" type="button" id="cancelDialogBtn">Cancel</button>
+        <button class="btn btn-primary" type="submit">Save activity</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
