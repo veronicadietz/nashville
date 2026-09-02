@@ -9,6 +9,7 @@
     activityEdits: "cosmicVirgos.activityEdits.v1",
     activityFlags: "cosmicVirgos.activityFlags.v1",
     notes: "cosmicVirgos.notes.v1",
+    noteDraft: "cosmicVirgos.noteDraft.v1",
     packing: "cosmicVirgos.packing.v1"
   };
 
@@ -366,8 +367,24 @@
 
     notes.forEach((note, index) => {
       const li = document.createElement("li");
-      const text = document.createElement("span");
-      text.textContent = note;
+      const editor = document.createElement("textarea");
+      editor.className = "note-editor";
+      editor.value = note;
+      editor.rows = 2;
+      editor.maxLength = 300;
+      editor.setAttribute("aria-label", `Edit note: ${note}`);
+      editor.addEventListener("input", () => {
+        notes[index] = editor.value;
+        writeJSON(STORAGE.notes, notes);
+        editor.style.height = "auto";
+        editor.style.height = `${editor.scrollHeight}px`;
+        const status = $("#notesSaveStatus");
+        if (status) status.textContent = "Saved just now on this device.";
+      });
+      window.requestAnimationFrame(() => {
+        editor.style.height = "auto";
+        editor.style.height = `${editor.scrollHeight}px`;
+      });
       const remove = document.createElement("button");
       remove.type = "button";
       remove.setAttribute("aria-label", `Delete note: ${note}`);
@@ -377,7 +394,7 @@
         writeJSON(STORAGE.notes, notes);
         renderNotes();
       });
-      li.append(text, remove);
+      li.append(editor, remove);
       list.appendChild(li);
     });
     refreshIcons();
@@ -391,6 +408,7 @@
     notes.unshift(value);
     notes = notes.slice(0, 40);
     writeJSON(STORAGE.notes, notes);
+    writeJSON(STORAGE.noteDraft, "");
     input.value = "";
     renderNotes();
     showToast("Note saved on this browser.");
@@ -688,6 +706,12 @@
     $("#cancelDialogBtn").addEventListener("click", closeActivityDialog);
     $("#activityForm").addEventListener("submit", saveActivityFromForm);
     $("#noteForm").addEventListener("submit", addNote);
+    $("#noteInput").value = readJSON(STORAGE.noteDraft, "");
+    $("#noteInput").addEventListener("input", (event) => {
+      writeJSON(STORAGE.noteDraft, event.target.value);
+      const status = $("#notesSaveStatus");
+      if (status) status.textContent = event.target.value ? "Draft saved on this device." : "Changes save automatically on this device.";
+    });
     $("#packingForm").addEventListener("submit", addPackingItem);
     $("#exportBtn").addEventListener("click", exportUpdates);
     $("#importBtn").addEventListener("click", () => $("#importFile").click());

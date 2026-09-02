@@ -13,7 +13,7 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 - Activity list with expandable detail panel
 - Add and edit activity details in the browser
 - Save / planned activity states
-- High-contrast Notes + Ideas section with easy mobile entry
+- High-contrast Notes + Ideas section with editable auto-saving note cards and draft recovery
 - Editable Packing + Reminders checklist (add, check off, or remove items)
 - Export and import trip updates as JSON
 - Live Nashville weather via Open-Meteo when the trip enters the forecast window

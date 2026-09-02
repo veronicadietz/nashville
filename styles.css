@@ -79,3 +79,18 @@ body{font-size:16px}
 .notes-card .sync-tools p{color:#fff8ef;font-weight:700}
 .notes-card .btn-secondary{color:#fff;background:#702f3d;border-color:#ffd1bf}
 .notes-card .btn-primary{color:#fff;background:#5e2531;border-color:#3f1820}
+
+/* Narrow-phone containment and maximum note readability */
+html{-webkit-text-size-adjust:100%}
+.notes-card{width:100%;max-width:100%;min-width:0;overflow:hidden}
+.notes-card .card-heading,.notes-intro,.note-form,.notes-list,.sync-tools{width:100%;max-width:100%;min-width:0}
+.note-form textarea{display:block;width:100%;max-width:100%;min-width:0;color:#000f12;font-family:var(--sans);font-size:1.08rem;font-weight:800;line-height:1.55;overflow-wrap:anywhere;word-break:break-word}
+.notes-list li{width:100%;max-width:100%;min-width:0;overflow:hidden;color:#000f12;font-family:var(--sans);font-size:1.08rem;font-weight:800;line-height:1.55}
+.notes-list li>span{display:block;min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:break-word;white-space:normal}
+.notes-list button{flex:0 0 40px;min-width:40px;max-width:40px}
+@media(max-width:420px){.notes-card{padding:20px 14px}.notes-card .card-heading{align-items:flex-start;gap:8px}.notes-card .card-heading h3{font-size:1.45rem}.notes-card .text-button{flex:0 0 auto;padding:8px}.notes-intro{font-size:1rem;line-height:1.55}.note-form textarea{font-size:17px}.notes-list li{padding:14px 12px;font-size:17px;line-height:1.55}.notes-list button{flex-basis:38px;min-width:38px;max-width:38px}}
+
+.notes-save-status{margin:-8px 0 14px;color:#fff4e7;font-size:.9rem;font-weight:750}
+.note-editor{display:block;flex:1 1 auto;width:100%;max-width:100%;min-width:0;min-height:52px;margin:0;padding:2px;color:#000f12;background:#fff;border:0;border-radius:0;resize:none;overflow:hidden;font-family:var(--sans);font-size:1.08rem;font-weight:800;line-height:1.55;overflow-wrap:anywhere;word-break:break-word}
+.note-editor:focus{outline:3px solid #9b4656;outline-offset:3px}
+@media(max-width:420px){.notes-save-status{font-size:.92rem}.note-editor{font-size:17px;line-height:1.55}}
