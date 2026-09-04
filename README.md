@@ -1,6 +1,6 @@
 # Cowboys, Cocktails & Cosmic Virgos
 
-Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
+Static GitHub Pages site for a private Nashville girls trip.
 
 ## What is already built
 
@@ -19,12 +19,14 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 - Live Nashville weather via Open-Meteo when the trip enters the forecast window
 - Mobile layout
 - Optimized local WebP hero, Airbnb, fire-pit, butterfly, stars, boots, tarot, and other sticker artwork
+- Passcode-gated private trip details stored as encrypted data rather than readable page source
 
 ## Files
 
 - `index.html` - page structure
 - `styles.css` - branding, layout, animations, responsive styles
 - `trip-data.js` - core trip content and activity starter data
+- `private-trip.enc.js` - AES-GCM encrypted dates, flight details, reservation details, and private stay information
 - `script.js` - activity picker, local edits, notes, weather, share tools
 - `assets/images/*.webp` - compact, locally hosted artwork used by the page
 - `assets/favicon.svg` - simple moon and star favicon
@@ -42,6 +44,12 @@ Static GitHub Pages starter for the Nashville girls trip, Sept 19 - 23, 2026.
 8. GitHub will provide a public URL similar to `https://yourusername.github.io/nashville-girls-trip/`.
 
 No build step is required.
+
+## Private details
+
+The public page and repository contain redacted placeholders. Exact trip dates, flight details, confirmation numbers, rental details, and private stay information are stored only inside `private-trip.enc.js` as AES-GCM encrypted text. The passcode is used in the visitor's browser to decrypt that information and is not saved. Reloading the page locks the information again.
+
+Because GitHub Pages is a static host, this is encrypted client-side privacy rather than server-side account authentication. It prevents casual visitors and source-code readers from seeing the details, but anyone can download the encrypted file and attempt to guess the passcode offline. Use a long, unique passcode and share it privately with the group.
 
 ## Image setup
 
@@ -98,7 +106,7 @@ For true shared live editing, the next version should connect the same interface
 
 Weather uses the free Open-Meteo API with Nashville coordinates. No API key is required. The highlighted “Nashville right now” card loads current conditions every time the page opens.
 
-The API does not provide reliable forecasts months in advance. Until the trip enters the available forecast window, the site displays the five trip dates as pending. When all five dates become available, that row automatically switches to the Sept. 19–23 live forecast—no manual update is needed.
+The API does not provide reliable forecasts months in advance. Until the private trip enters the available forecast window, the site displays five locked or pending date cards. After the page is unlocked and all five dates become available, that row automatically switches to the live trip forecast—no manual update is needed.
 
 ## Typography
 

@@ -111,6 +111,11 @@
     $("#heroImage").src = data.images.hero;
     $("#stayImage").src = data.images.stay;
 
+    if (data.privacy?.locked || !data.trip.startDate) {
+      $("#daysToGo").textContent = "Locked";
+      return;
+    }
+
     const tripStart = parseDateParts(data.trip.startDate);
     const today = new Date();
     const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
@@ -522,6 +527,99 @@
     reader.readAsText(file);
   }
 
+  function bytesFromBase64(value) {
+    const binary = window.atob(value);
+    return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+  }
+
+  async function decryptPrivateDetails(passcode) {
+    const bundle = window.ENCRYPTED_TRIP_DETAILS;
+    if (!bundle || !window.crypto?.subtle) throw new Error("Private details are unavailable");
+
+    const encoder = new TextEncoder();
+    const keyMaterial = await window.crypto.subtle.importKey(
+      "raw",
+      encoder.encode(passcode),
+      "PBKDF2",
+      false,
+      ["deriveKey"]
+    );
+    const key = await window.crypto.subtle.deriveKey(
+      {
+        name: "PBKDF2",
+        salt: bytesFromBase64(bundle.salt),
+        iterations: bundle.iterations,
+        hash: "SHA-256"
+      },
+      keyMaterial,
+      { name: "AES-GCM", length: 256 },
+      false,
+      ["decrypt"]
+    );
+    const plaintext = await window.crypto.subtle.decrypt(
+      { name: "AES-GCM", iv: bytesFromBase64(bundle.iv) },
+      key,
+      bytesFromBase64(bundle.ciphertext)
+    );
+    return JSON.parse(new TextDecoder().decode(plaintext));
+  }
+
+  function openPasscodeDialog() {
+    const dialog = $("#passcodeDialog");
+    $("#passcodeError").textContent = "";
+    if (typeof dialog.showModal === "function") dialog.showModal();
+    else dialog.setAttribute("open", "");
+    window.setTimeout(() => $("#passcodeInput").focus(), 50);
+  }
+
+  function closePasscodeDialog() {
+    const dialog = $("#passcodeDialog");
+    $("#passcodeInput").value = "";
+    $("#passcodeError").textContent = "";
+    if (typeof dialog.close === "function") dialog.close();
+    else dialog.removeAttribute("open");
+  }
+
+  async function unlockPrivateDetails(event) {
+    event.preventDefault();
+    const input = $("#passcodeInput");
+    const error = $("#passcodeError");
+    const button = $("#passcodeForm button[type='submit']");
+    error.textContent = "";
+    button.disabled = true;
+    button.textContent = "Unlocking…";
+
+    try {
+      const privateDetails = await decryptPrivateDetails(input.value);
+      data.trip = { ...data.trip, ...privateDetails.trip };
+      data.flights = privateDetails.flights;
+      data.airportNote = privateDetails.airportNote;
+      data.car = privateDetails.car;
+      data.stay = privateDetails.stay;
+      data.privacy.locked = false;
+
+      renderHero();
+      renderFlights();
+      renderCar();
+      renderStay();
+      loadWeather();
+      const unlockButton = $("#unlockPrivateBtn");
+      unlockButton.innerHTML = '<i data-lucide="unlock-keyhole"></i><span>Private details unlocked</span>';
+      unlockButton.disabled = true;
+      unlockButton.classList.add("is-unlocked");
+      refreshIcons();
+      closePasscodeDialog();
+      showToast("Private trip details unlocked for this tab.");
+    } catch {
+      error.textContent = "That passcode did not work. Please try again.";
+      input.select();
+    } finally {
+      button.disabled = false;
+      button.innerHTML = '<i data-lucide="unlock-keyhole"></i>Unlock';
+      refreshIcons();
+    }
+  }
+
   async function shareTrip() {
     const shareData = {
       title: data.trip.title,
@@ -550,8 +648,13 @@
     const current = $("#currentWeather");
     const grid = $("#weatherGrid");
     const footnote = $("#weatherFootnote");
+    const forecastHeading = $("#forecastHeading");
+    const privateLocked = Boolean(data.privacy?.locked);
     renderPendingWeather();
-    footnote.textContent = data.weather.seasonalNote;
+    forecastHeading.textContent = privateLocked ? "Travel forecast · unlock dates" : `Travel dates · ${data.trip.datesLabel}`;
+    footnote.textContent = privateLocked
+      ? "Unlock private details to reveal the travel dates and their automatic forecast."
+      : data.weather.seasonalNote;
 
     const params = new URLSearchParams({
       latitude: String(data.weather.latitude),
@@ -585,7 +688,7 @@
         status.textContent = "Current conditions update automatically whenever the page opens.";
       }
 
-      const tripRows = daily.time.map((date, index) => ({
+      const tripRows = privateLocked ? [] : daily.time.map((date, index) => ({
         date,
         code: daily.weather_code?.[index],
         high: daily.temperature_2m_max?.[index],
@@ -596,8 +699,8 @@
       if (tripRows.length === 5) {
         grid.innerHTML = tripRows.map(weatherCardHTML).join("");
         footnote.textContent = "Live weather data from Open-Meteo. Check again before packing because September storms can shift quickly.";
-      } else {
-        footnote.textContent = "The Sept 19–23 forecast will appear here automatically once those dates enter the reliable forecast window. Current Nashville weather is already live above.";
+      } else if (!privateLocked) {
+        footnote.textContent = `The ${data.trip.datesLabel} forecast will appear here automatically once those dates enter the reliable forecast window. Current Nashville weather is already live above.`;
       }
     } catch {
       status.textContent = "Live weather is temporarily unavailable.";
@@ -608,6 +711,17 @@
 
   function renderPendingWeather() {
     const grid = $("#weatherGrid");
+    if (data.privacy?.locked) {
+      grid.innerHTML = Array.from({ length: 5 }, () => `
+        <div class="weather-day weather-locked">
+          <span class="day">Private date</span>
+          <span class="weather-icon" aria-hidden="true">🔒</span>
+          <strong>Locked</strong>
+          <small>Unlock to view</small>
+        </div>
+      `).join("");
+      return;
+    }
     const dates = enumerateDates(data.trip.startDate, data.trip.endDate);
     grid.innerHTML = dates.map((date) => `
       <div class="weather-day">
@@ -720,6 +834,9 @@
       event.target.value = "";
     });
     $("#shareTripBtn").addEventListener("click", shareTrip);
+    $("#unlockPrivateBtn").addEventListener("click", openPasscodeDialog);
+    $("#closePasscodeBtn").addEventListener("click", closePasscodeDialog);
+    $("#passcodeForm").addEventListener("submit", unlockPrivateDetails);
   }
 
   function init() {

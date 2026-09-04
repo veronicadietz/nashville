@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#021f24">
-  <meta name="description" content="Cowboys, Cocktails & Cosmic Virgos, a shared Nashville girls trip dashboard for Sept 19 - 23, 2026.">
+  <meta name="description" content="Cowboys, Cocktails & Cosmic Virgos, a shared Nashville girls trip dashboard with private reservation details.">
   <title>Cowboys, Cocktails & Cosmic Virgos | Nashville Trip HQ</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="styles.css">
   <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
   <script defer src="trip-data.js"></script>
+  <script defer src="private-trip.enc.js"></script>
   <script defer src="script.js"></script>
 </head>
 <body>
@@ -35,6 +36,8 @@
         <a class="nav-link" href="#notes"><i data-lucide="notebook-tabs"></i><span>Notes</span></a>
       </nav>
 
+      <button class="private-unlock" id="unlockPrivateBtn" type="button"><i data-lucide="lock-keyhole"></i><span>Unlock private details</span></button>
+
       <div class="sidebar-card">
         <img src="assets/images/star-cluster.webp" alt="" width="120" height="120">
         <p>Good plans, good friends<br>& a little magic.</p>
@@ -50,7 +53,7 @@
         <div class="hero-copy">
           <div class="eyebrow">Shared Nashville trip dashboard</div>
           <h1>Cowboys, Cocktails <span>&</span><br>Cosmic Virgos</h1>
-          <div class="hero-meta"><span id="tripDates">Sept 19 - 23, 2026</span></div>
+          <div class="hero-meta"><span id="tripDates">Private trip dates</span></div>
           <p class="hero-location"><span class="divider-dot">✦</span><span id="tripLocation">Nashville, Tennessee</span><span class="divider-dot">✦</span></p>
           <p id="tripTagline">A shared trip site for plans, reservations, and spontaneous magic.</p>
 
@@ -188,7 +191,7 @@
             <span class="current-label">Nashville right now</span>
             <strong>Loading current conditions…</strong>
           </div>
-          <h4 class="forecast-heading">Travel dates · Sept 19–23</h4>
+          <h4 class="forecast-heading" id="forecastHeading">Travel forecast · unlock dates</h4>
           <div id="weatherGrid" class="weather-grid" aria-live="polite"></div>
           <div class="weather-footnote"><span aria-hidden="true">✦</span><span id="weatherFootnote"></span></div>
         </article>
@@ -241,6 +244,23 @@
       </footer>
     </main>
   </div>
+
+  <dialog id="passcodeDialog" class="passcode-dialog">
+    <form id="passcodeForm" class="passcode-form">
+      <button class="icon-button passcode-close" type="button" id="closePasscodeBtn" aria-label="Close passcode window"><i data-lucide="x"></i></button>
+      <div class="passcode-icon" aria-hidden="true"><i data-lucide="lock-keyhole"></i></div>
+      <p class="eyebrow">Private trip details</p>
+      <h2>Unlock the itinerary</h2>
+      <p>Enter the group passcode to reveal exact dates, flight details, confirmation numbers, and private stay information.</p>
+      <label for="passcodeInput">Passcode</label>
+      <div class="passcode-input-row">
+        <input id="passcodeInput" type="password" autocomplete="current-password" required>
+        <button class="btn btn-primary" type="submit"><i data-lucide="unlock-keyhole"></i>Unlock</button>
+      </div>
+      <p id="passcodeError" class="passcode-error" role="alert" aria-live="polite"></p>
+      <small>The passcode is used only in this browser tab and is never saved.</small>
+    </form>
+  </dialog>
 
   <dialog id="activityDialog" class="activity-dialog">
     <form method="dialog" id="activityForm" class="activity-form">

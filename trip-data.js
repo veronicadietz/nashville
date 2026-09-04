@@ -2,9 +2,9 @@ window.TRIP_DATA = {
   trip: {
     title: "Cowboys, Cocktails & Cosmic Virgos",
     subtitle: "Nashville Trip HQ",
-    datesLabel: "Sept 19 - 23, 2026",
-    startDate: "2026-09-19",
-    endDate: "2026-09-23",
+    datesLabel: "Private trip dates",
+    startDate: "",
+    endDate: "",
     location: "Nashville, Tennessee",
     travelers: 3,
     nights: 4,
@@ -17,6 +17,10 @@ window.TRIP_DATA = {
     stay: "assets/images/stay.webp"
   },
 
+  privacy: {
+    locked: true
+  },
+
   flights: [
     {
       id: "veronica",
@@ -24,20 +28,20 @@ window.TRIP_DATA = {
       airline: "Southwest",
       accent: "#9B3531",
       outbound: {
-        flight: "WN 4220",
-        route: "LAS → BNA",
-        date: "Sat, Sept 19, 2026",
-        time: "6:40 AM - 12:15 PM",
-        note: "Nonstop, 3h 35m"
+        flight: "Locked",
+        route: "Flight details locked",
+        date: "Unlock to view",
+        time: "",
+        note: ""
       },
       return: {
-        flight: "WN 0500 / WN 4847",
-        route: "BNA → DEN → LAS",
-        date: "Wed, Sept 23, 2026",
-        time: "3:30 PM - 7:05 PM"
+        flight: "Locked",
+        route: "Flight details locked",
+        date: "Unlock to view",
+        time: ""
       },
-      confirmation: "BRKMWF",
-      seatNote: "Seats assigned at check-in"
+      confirmation: "",
+      seatNote: "Private details"
     },
     {
       id: "natasha",
@@ -45,20 +49,20 @@ window.TRIP_DATA = {
       airline: "Delta",
       accent: "#C8795B",
       outbound: {
-        flight: "DL 768",
-        route: "LAX → BNA",
-        date: "Sat, Sept 19, 2026",
-        time: "6:45 AM - 12:44 PM",
-        note: "Delta Main Basic (E)"
+        flight: "Locked",
+        route: "Flight details locked",
+        date: "Unlock to view",
+        time: "",
+        note: ""
       },
       return: {
-        flight: "DL 355",
-        route: "BNA → LAX",
-        date: "Wed, Sept 23, 2026",
-        time: "3:26 PM - 5:49 PM"
+        flight: "Locked",
+        route: "Flight details locked",
+        date: "Unlock to view",
+        time: ""
       },
       confirmation: "",
-      seatNote: "Seat assigned at gate"
+      seatNote: "Private details"
     },
     {
       id: "kassiadoll",
@@ -66,45 +70,45 @@ window.TRIP_DATA = {
       airline: "Delta",
       accent: "#98BDB6",
       outbound: {
-        flight: "DL 768",
-        route: "LAX → BNA",
-        date: "Sat, Sept 19, 2026",
-        time: "6:45 AM - 12:44 PM",
-        note: "Delta Main Basic (E)"
+        flight: "Locked",
+        route: "Flight details locked",
+        date: "Unlock to view",
+        time: "",
+        note: ""
       },
       return: {
-        flight: "DL 355",
-        route: "BNA → LAX",
-        date: "Wed, Sept 23, 2026",
-        time: "3:26 PM - 5:49 PM"
+        flight: "Locked",
+        route: "Flight details locked",
+        date: "Unlock to view",
+        time: ""
       },
       confirmation: "",
-      seatNote: "Seat assigned at gate"
+      seatNote: "Private details"
     }
   ],
 
-  airportNote: "Meet at baggage claim / rental car center. Veronica lands at 12:15 PM. Natasha and Kassiadoll land at 12:44 PM.",
+  airportNote: "Unlock private details to view arrival coordination.",
 
   car: {
     company: "Enterprise",
-    confirmation: "2131844844",
+    confirmation: "Locked",
     pickup: {
-      location: "Nashville International Airport",
-      date: "Saturday, September 19, 2026",
-      time: "12:30 PM"
+      location: "Private rental details",
+      date: "Unlock to view",
+      time: ""
     },
     return: {
-      location: "Nashville International Airport",
-      date: "Wednesday, September 23, 2026",
-      time: "3:00 PM"
+      location: "Private rental details",
+      date: "Unlock to view",
+      time: ""
     }
   },
 
   stay: {
     title: "Cozy Nashville Stay | 8 minutes to Downtown!",
-    host: "Dominique",
+    host: "Private host",
     type: "Entire home in Nashville",
-    area: "East Nashville / Gallatin Ave scene",
+    area: "Location available after unlocking",
     guests: 6,
     bedrooms: 3,
     beds: 4,
@@ -114,8 +118,8 @@ window.TRIP_DATA = {
       "Free off-street parking",
       "About 15 minutes to BNA"
     ],
-    address: "Exact check-in address: add when available in Airbnb reservation",
-    url: "https://www.airbnb.com/rooms/1756236076704236180?guests=1&adults=1&s=67&unique_share_id=d25714c4-00a9-45e6-b128-418148b7bf70"
+    address: "Private stay details",
+    url: ""
   },
 
   weather: {
