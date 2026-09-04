@@ -567,8 +567,9 @@
   function openPasscodeDialog() {
     const dialog = $("#passcodeDialog");
     $("#passcodeError").textContent = "";
-    if (typeof dialog.showModal === "function") dialog.showModal();
-    else dialog.setAttribute("open", "");
+    dialog.hidden = false;
+    dialog.setAttribute("aria-hidden", "false");
+    document.body.classList.add("private-modal-open");
     window.setTimeout(() => $("#passcodeInput").focus(), 50);
   }
 
@@ -576,8 +577,9 @@
     const dialog = $("#passcodeDialog");
     $("#passcodeInput").value = "";
     $("#passcodeError").textContent = "";
-    if (typeof dialog.close === "function") dialog.close();
-    else dialog.removeAttribute("open");
+    dialog.hidden = true;
+    dialog.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("private-modal-open");
   }
 
   async function unlockPrivateDetails(event) {
@@ -809,6 +811,18 @@
     }));
   }
 
+  function bindPrivacyEvents() {
+    $("#unlockPrivateBtn").addEventListener("click", openPasscodeDialog);
+    $("#closePasscodeBtn").addEventListener("click", closePasscodeDialog);
+    $("#passcodeForm").addEventListener("submit", unlockPrivateDetails);
+    $("#passcodeDialog").addEventListener("click", (event) => {
+      if (event.target.id === "passcodeDialog") closePasscodeDialog();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !$("#passcodeDialog").hidden) closePasscodeDialog();
+    });
+  }
+
   function bindEvents() {
     $("#drawIdeaBtn").addEventListener("click", drawRandomActivity);
     $("#hatButton").addEventListener("click", drawRandomActivity);
@@ -834,12 +848,12 @@
       event.target.value = "";
     });
     $("#shareTripBtn").addEventListener("click", shareTrip);
-    $("#unlockPrivateBtn").addEventListener("click", openPasscodeDialog);
-    $("#closePasscodeBtn").addEventListener("click", closePasscodeDialog);
-    $("#passcodeForm").addEventListener("submit", unlockPrivateDetails);
   }
 
   function init() {
+    // Bind privacy controls first so the lock remains usable even if a
+    // separate editable dashboard section contains unexpected saved data.
+    bindPrivacyEvents();
     renderHero();
     renderFlights();
     renderCar();

@@ -10,11 +10,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=privacy-20260904-2">
   <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.js"></script>
-  <script defer src="trip-data.js"></script>
-  <script defer src="private-trip.enc.js"></script>
-  <script defer src="script.js"></script>
+  <script defer src="trip-data.js?v=privacy-20260904-2"></script>
+  <script defer src="private-trip.enc.js?v=privacy-20260904-2"></script>
+  <script defer src="script.js?v=privacy-20260904-2"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to trip details</a>
@@ -245,12 +245,12 @@
     </main>
   </div>
 
-  <dialog id="passcodeDialog" class="passcode-dialog">
+  <div id="passcodeDialog" class="passcode-dialog" role="dialog" aria-modal="true" aria-labelledby="passcodeTitle" aria-hidden="true" hidden>
     <form id="passcodeForm" class="passcode-form">
       <button class="icon-button passcode-close" type="button" id="closePasscodeBtn" aria-label="Close passcode window"><i data-lucide="x"></i></button>
       <div class="passcode-icon" aria-hidden="true"><i data-lucide="lock-keyhole"></i></div>
       <p class="eyebrow">Private trip details</p>
-      <h2>Unlock the itinerary</h2>
+      <h2 id="passcodeTitle">Unlock the itinerary</h2>
       <p>Enter the group passcode to reveal exact dates, flight details, confirmation numbers, and private stay information.</p>
       <label for="passcodeInput">Passcode</label>
       <div class="passcode-input-row">
@@ -260,7 +260,7 @@
       <p id="passcodeError" class="passcode-error" role="alert" aria-live="polite"></p>
       <small>The passcode is used only in this browser tab and is never saved.</small>
     </form>
-  </dialog>
+  </div>
 
   <dialog id="activityDialog" class="activity-dialog">
     <form method="dialog" id="activityForm" class="activity-form">
